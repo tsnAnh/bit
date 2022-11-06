@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../blocs/authentication/authentication_cubit.dart';
 import '../../l10n/l10n.dart';
 import '../../models/dtos/city.dart';
+import '../../navigation/navigation.dart';
 import 'bloc/home_bloc.dart';
 import 'bloc/home_event.dart';
 import 'bloc/home_state.dart';
@@ -16,12 +18,28 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(context.l10n.text_hello_world),
       ),
-      body: BlocProvider<HomeBloc>(
-        create: (context) => HomeBloc(context.read()),
-        child: Center(
-          child: BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) => _buildHome(context, state),
-          ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: BlocProvider<HomeBloc>(
+                create: (context) => HomeBloc(context.read()),
+                child: Center(
+                  child: BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) => _buildHome(context, state),
+                  ),
+                ),
+              ),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                context.read<AuthenticationCubit>().setUnauthenticated();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, AppRoutes.login, (route) => false);
+              },
+              child: const Text('Logout'),
+            )
+          ],
         ),
       ),
     );
@@ -47,8 +65,9 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildCityList(List<City> cities) {
     return ListView.builder(
+      shrinkWrap: true,
       itemBuilder: (context, index) =>
-          ListTile(title: Text(cities[index].name)),
+          ListTile(key: Key(cities[index].id), title: Text(cities[index].name)),
       itemCount: cities.length,
     );
   }

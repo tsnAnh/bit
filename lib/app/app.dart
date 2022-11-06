@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/authentication/authentication_cubit.dart';
 import '../di/service_locator.dart';
 import '../domain/repositories/example_repository.dart';
 import '../l10n/l10n.dart';
@@ -13,13 +14,20 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: <RepositoryProvider<Object>>[
+      providers: [
         RepositoryProvider<ExampleRepository>(
           create: (BuildContext context) =>
               ServiceLocator.instance.inject<ExampleRepository>(),
         ),
       ],
-      child: const AppView(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AuthenticationCubit(),
+          ),
+        ],
+        child: const AppView(),
+      ),
     );
   }
 }
@@ -35,6 +43,9 @@ class AppView extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       onGenerateRoute: AppNavigation.onGeneratedRoute,
+      initialRoute: context.read<AuthenticationCubit>().state
+          ? AppRoutes.home
+          : AppRoutes.login,
     );
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../screens/home/home.dart';
+import '../screens/login/login.dart';
 
 abstract class AppRoutes {
-  static const home = '/';
+  static const login = 'login';
+  static const home = 'home';
 }
 
 abstract class AppNavigation {
@@ -11,6 +13,8 @@ abstract class AppNavigation {
     switch (settings.name) {
       case AppRoutes.home:
         return AppPageRoute((_) => const HomeScreen(), settings);
+      case AppRoutes.login:
+        return AppPageRoute((_) => const LoginScreen(), settings);
       default:
         throw 'Cannot find destination route';
     }

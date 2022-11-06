@@ -67,3 +67,4 @@ doc/api/
 
 *.freezed.dart
 *.g.dart
+/ios/Podfile.lock
