@@ -1,18 +1,27 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-class AuthenticationCubit extends HydratedCubit<bool> {
-  AuthenticationCubit() : super(false);
+import '../../data/local/local.dart';
+import '../../data/local/local_storage_key.dart';
 
-  static const authenticationStateKey = 'auth_state';
+class AuthenticationCubit extends HydratedCubit<String?> {
+  AuthenticationCubit(this.localStorage) : super(null);
 
-  void setAuthenticated() => emit(true);
+  final LocalStorage localStorage;
 
-  void setUnauthenticated() => emit(false);
+  void setToken(String token) {
+    localStorage.setString(LocalStorageKey.token, token);
+    emit(token);
+  }
+
+  void unsetToken() {
+    localStorage.remove(LocalStorageKey.token);
+    emit(null);
+  }
 
   @override
-  bool? fromJson(Map<String, dynamic> json) =>
-      json[authenticationStateKey] as bool;
+  String? fromJson(Map<String, dynamic> json) =>
+      json[LocalStorageKey.token] as String?;
 
   @override
-  Map<String, dynamic>? toJson(bool state) => {authenticationStateKey: state};
+  Map<String, dynamic>? toJson(String? state) => {LocalStorageKey.token: state};
 }

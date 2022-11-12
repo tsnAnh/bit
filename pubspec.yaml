@@ -1,4 +1,4 @@
-name: flutter_bloc_base_source_code
+name: bit
 description: This is the base source code for Flutter.
 
 # The following line prevents the package from being accidentally published to
@@ -38,6 +38,8 @@ dependencies:
   hydrated_bloc: ^9.0.0
   path_provider: ^2.0.11
   flutter_hooks: ^0.18.5+1
+  shared_preferences: ^2.0.15
+  google_fonts: ^3.0.1
 
   # Service Locator
   get_it: ^7.2.0

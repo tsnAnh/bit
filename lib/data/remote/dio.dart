@@ -4,10 +4,11 @@ import 'interceptors/authentication_interceptor.dart';
 
 class DioClient {
   final String baseUrl;
+  final AuthenticationInterceptor authenticationInterceptor;
 
-  DioClient({required this.baseUrl}) {
+  DioClient({required this.baseUrl, required this.authenticationInterceptor}) {
     final baseOptions = createBaseOptions();
-    authDio = Dio(baseOptions)..interceptors.add(AuthenticationInterceptor());
+    authDio = Dio(baseOptions)..interceptors.add(authenticationInterceptor);
     dio = Dio(baseOptions);
   }
 

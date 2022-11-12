@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'color_schemes.dart';
 
@@ -12,6 +13,7 @@ abstract class AppTheme {
       snackBarTheme: const SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
       ),
+      textTheme: GoogleFonts.jetBrainsMonoTextTheme(),
     );
   }
 
@@ -22,6 +24,7 @@ abstract class AppTheme {
       snackBarTheme: const SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
       ),
+      textTheme: GoogleFonts.jetBrainsMonoTextTheme(),
     );
   }
 }
