@@ -1,6 +1,6 @@
 enum AppFlavor {
-  staging('https://api.medium.com/'),
-  production('https://api.medium.com/');
+  staging('https://api.medium.com/v1/'),
+  production('https://api.medium.com/v1/');
 
   final String baseUrl;
   // Flavor things...

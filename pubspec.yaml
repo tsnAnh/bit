@@ -40,6 +40,9 @@ dependencies:
   flutter_hooks: ^0.18.5+1
   shared_preferences: ^2.0.15
   google_fonts: ^3.0.1
+  webfeed: ^0.7.0
+  collection: ^1.16.0
+  cached_network_image: ^3.2.2
 
   # Service Locator
   get_it: ^7.2.0
