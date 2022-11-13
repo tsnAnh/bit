@@ -47,6 +47,13 @@ jobs:
       - name: Build Flutter staging apk
         run: flutter build apk --release -t lib/main_staging.dart
 
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          file: build/app/outputs/flutter-apk/app-release.apk
+
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
       # want to change this to 'flutter test'.
