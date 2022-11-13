@@ -1,4 +1,4 @@
-package com.napaglobal.flutter_bloc_base_source_code
+package dev.tsnanh.bit
 
 import io.flutter.embedding.android.FlutterActivity
 

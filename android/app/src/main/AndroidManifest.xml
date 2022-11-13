@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.napaglobal.flutter_bloc_base_source_code">
+    package="dev.tsnanh.bit">
    <application
         android:label="flutter_bloc_base_source_code"
         android:name="${applicationName}"
