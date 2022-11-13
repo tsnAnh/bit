@@ -10,7 +10,8 @@ class AuthenticationInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers['Authorization'] = localStorage.getString(LocalStorageKey.token);
+    options.headers['Authorization'] = 'Bearer ${localStorage.getString(LocalStorageKey.token)}';
+    print(options.path);
     handler.next(options);
   }
 }

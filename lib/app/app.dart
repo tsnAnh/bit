@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/authentication/authentication_cubit.dart';
+import '../blocs/user/user_cubit.dart';
 import '../di/service_locator.dart';
 import '../domain/domain.dart';
 import '../l10n/l10n.dart';
@@ -23,7 +24,12 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => AuthenticationCubit(ServiceLocator.instance.inject()),
+            create: (context) =>
+                AuthenticationCubit(ServiceLocator.instance.inject()),
+          ),
+          BlocProvider<UserCubit>(
+            create: (context) =>
+                UserCubit(context.read(), ServiceLocator.instance.inject()),
           ),
         ],
         child: const AppView(),
@@ -38,9 +44,9 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: ThemeMode.dark,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       onGenerateRoute: AppNavigation.onGeneratedRoute,

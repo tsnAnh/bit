@@ -8,8 +8,8 @@ class AuthenticationCubit extends HydratedCubit<String?> {
 
   final LocalStorage localStorage;
 
-  void setToken(String token) {
-    localStorage.setString(LocalStorageKey.token, token);
+  void setToken(String token) async {
+    await localStorage.setString(LocalStorageKey.token, token);
     emit(token);
   }
 

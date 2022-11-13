@@ -15,7 +15,7 @@ class UserFetched extends UserState {
   const UserFetched(this.user);
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [user];
 }
 
 class UserNotFetched extends UserState {

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../blocs/authentication/authentication_cubit.dart';
+import '../../blocs/user/user_cubit.dart';
 import '../../l10n/l10n.dart';
 import '../../navigation/navigation.dart';
 import 'views/bit_logo.dart';
@@ -57,10 +58,13 @@ class _LoginButton extends HookWidget {
                         const SnackBar(content: Text('Invalid token!')));
                     return;
                   }
-
                   isLoading.value = true;
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      AppRoutes.home, (route) => false);
+
+                  context.read<AuthenticationCubit>().setToken(token);
+                  context.read<UserCubit>().getUserInfo().then((value) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        AppRoutes.home, (route) => false);
+                  });
                 },
               )
             : const Center(child: CircularProgressIndicator()),

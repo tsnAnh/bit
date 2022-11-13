@@ -3,5 +3,7 @@
     "text_display_some_text": "Display some text!",
     "text_bit": "bit",
     "text_login": "Login",
-    "text_integration_token": "Integration token"
+    "text_integration_token": "Integration token",
+    "text_publications": "Publications",
+    "text_today_articles": "Today's articles"
 }
