@@ -14,7 +14,6 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
       centerTitle: true,
       title: Text(
         context.l10n.text_bit,

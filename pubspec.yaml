@@ -43,6 +43,7 @@ dependencies:
   webfeed: ^0.7.0
   collection: ^1.16.0
   cached_network_image: ^3.2.2
+  webview_flutter: ^3.0.4
 
   # Service Locator
   get_it: ^7.2.0

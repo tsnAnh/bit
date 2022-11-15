@@ -50,8 +50,10 @@ class _PublicationListView extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: state.publications.length,
             itemBuilder: (context, index) {
+              final publication = state.publications[index];
               return _PublicationView(
-                publication: state.publications[index],
+                key: Key(publication.id),
+                publication: publication,
               );
             },
           ),
