@@ -26,9 +26,25 @@ class LoginScreen extends HookWidget {
               onTextChanged: (text) => tokenRef.value = text,
             ),
             _LoginButton(token: tokenRef.value),
+            const _TutorialButton(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _TutorialButton extends StatelessWidget {
+  const _TutorialButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () => Navigator.of(context).pushNamed(AppRoutes.tutorial),
+      child:
+          Text(context.l10n.text_how_to_get_medium_integration_token),
     );
   }
 }

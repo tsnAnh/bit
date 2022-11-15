@@ -75,9 +75,9 @@ class _PublicationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Container(
-        color: Colors.white.withOpacity(.2),
-        child: ClipOval(
+      child: ClipOval(
+        child: Container(
+          color: Colors.white.withOpacity(.2),
           child: CachedNetworkImage(
             imageUrl: publication.imageUrl,
             fit: BoxFit.cover,
