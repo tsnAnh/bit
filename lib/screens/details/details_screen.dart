@@ -26,7 +26,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(widget.article.link);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -34,6 +33,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         title: Text(widget.article.title),
       ),
       body: SafeArea(
+        bottom: false,
         child: Stack(
           children: [
             Visibility(

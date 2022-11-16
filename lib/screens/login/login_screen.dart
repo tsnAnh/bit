@@ -25,7 +25,13 @@ class LoginScreen extends HookWidget {
             TokenTextField(
               onTextChanged: (text) => tokenRef.value = text,
             ),
+            const SizedBox(
+              height: 8,
+            ),
             _LoginButton(token: tokenRef.value),
+            const SizedBox(
+              height: 16,
+            ),
             const _TutorialButton(),
           ],
         ),
@@ -41,10 +47,15 @@ class _TutorialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () => Navigator.of(context).pushNamed(AppRoutes.tutorial),
-      child:
-          Text(context.l10n.text_how_to_get_medium_integration_token),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: SizedBox(
+        width: double.infinity,
+        child: OutlinedButton(
+          onPressed: () => Navigator.of(context).pushNamed(AppRoutes.tutorial),
+          child: Text(context.l10n.text_how_to_get_medium_integration_token),
+        ),
+      ),
     );
   }
 }
