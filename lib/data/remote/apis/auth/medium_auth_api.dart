@@ -35,10 +35,12 @@ class MediumAuthApi extends Api implements MediumDataSource {
 
   @override
   Future<Either<DataSourceError, List<ArticleJson>>> getArticles(
-      List<String> publicationNames) async {
+    List<String> publicationUrls,
+    bool shuffled,
+  ) async {
     return withTimeoutRequest(() async {
       List<ArticleJson> articles = [];
-      final futures = publicationNames.map((e) async {
+      final futures = publicationUrls.map((e) async {
         var elements = e.split('/');
         elements.insert(3, 'feed');
         final url = elements.join('/');
@@ -74,7 +76,7 @@ class MediumAuthApi extends Api implements MediumDataSource {
       }).toList();
       await Future.wait(futures);
 
-      articles.shuffle();
+      if (shuffled) articles.shuffle();
       return articles;
     });
   }

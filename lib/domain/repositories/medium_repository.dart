@@ -9,5 +9,7 @@ abstract class MediumRepository {
 
   Future<Either<DataSourceError, List<Publication>>> getPublications();
 
-  Future<Either<DataSourceError, List<Article>>> getArticlesByPublication(List<String> publicationNames);
+  Future<Either<DataSourceError, List<Article>>> getArticlesByPublication(
+      List<String> publicationUrls,
+      {bool shuffled = true});
 }

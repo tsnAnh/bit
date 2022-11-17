@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../models/domain/article.dart';
+import '../models/domain/publication.dart';
+import '../screens/articles/articles.dart';
 import '../screens/details/details.dart';
 import '../screens/home/home.dart';
 import '../screens/login/login.dart';
@@ -11,6 +13,7 @@ abstract class AppRoutes {
   static const login = 'login';
   static const home = 'home';
   static const details = 'details';
+  static const articles = 'articles';
 }
 
 abstract class AppNavigation {
@@ -27,6 +30,12 @@ abstract class AppNavigation {
           (context) => DetailsScreen(article: settings.arguments as Article),
           settings,
         );
+      case AppRoutes.articles:
+        return AppPageRoute(
+            (context) => ArticlesScreen(
+                  publication: settings.arguments as Publication,
+                ),
+            settings);
       default:
         throw 'Cannot find destination route';
     }

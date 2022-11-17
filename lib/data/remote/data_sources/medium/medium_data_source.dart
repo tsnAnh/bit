@@ -9,5 +9,5 @@ abstract class MediumDataSource {
 
   Future<Either<DataSourceError, List<PublicationJson>>> getPublications();
 
-  Future<Either<DataSourceError, List<ArticleJson>>> getArticles(List<String> publicationNames);
+  Future<Either<DataSourceError, List<ArticleJson>>> getArticles(List<String> publicationUrls, bool shuffled);
 }

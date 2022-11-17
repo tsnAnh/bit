@@ -23,8 +23,9 @@ class MediumRepositoryImpl implements MediumRepository {
 
   @override
   Future<Either<DataSourceError, List<Article>>> getArticlesByPublication(
-      List<String> publicationNames) async {
-    return (await mediumDataSource.getArticles(publicationNames))
+      List<String> publicationUrls,
+      {bool shuffled = true}) async {
+    return (await mediumDataSource.getArticles(publicationUrls, shuffled))
         .map((values) => values.map((dto) => Article.fromDTO(dto)).toList());
   }
 }

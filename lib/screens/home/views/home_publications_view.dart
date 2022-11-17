@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../common/colors.dart';
 import '../../../common/extensions/extensions.dart';
 import '../../../l10n/l10n.dart';
 import '../../../models/domain/publication.dart';
-import '../../../widgets/bit_circular_progress_bar.dart';
+import '../../../navigation/navigation.dart';
 import '../bloc/home_bloc.dart';
 
 class HomePublicationsView extends HookWidget {
@@ -54,6 +53,10 @@ class _PublicationListView extends StatelessWidget {
               return _PublicationView(
                 key: Key(publication.id),
                 publication: publication,
+                onPublicationClicked: () => Navigator.of(context).pushNamed(
+                  AppRoutes.articles,
+                  arguments: publication,
+                ),
               );
             },
           ),
@@ -67,20 +70,25 @@ class _PublicationView extends StatelessWidget {
   const _PublicationView({
     Key? key,
     required this.publication,
+    required this.onPublicationClicked,
   }) : super(key: key);
 
   final Publication publication;
+  final VoidCallback onPublicationClicked;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ClipOval(
-        child: Container(
-          color: Colors.white.withOpacity(.2),
-          child: CachedNetworkImage(
-            imageUrl: publication.imageUrl,
-            fit: BoxFit.cover,
+        child: GestureDetector(
+          onTap: onPublicationClicked,
+          child: Container(
+            color: Colors.white.withOpacity(.2),
+            child: CachedNetworkImage(
+              imageUrl: publication.imageUrl,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
