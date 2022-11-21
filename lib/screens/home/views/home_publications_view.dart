@@ -7,6 +7,8 @@ import '../../../common/extensions/extensions.dart';
 import '../../../l10n/l10n.dart';
 import '../../../models/domain/publication.dart';
 import '../../../navigation/navigation.dart';
+import '../../../widgets/bit_empty_widget.dart';
+import '../../../widgets/error/bit_error_widget.dart';
 import '../bloc/home_bloc.dart';
 
 class HomePublicationsView extends HookWidget {
@@ -43,23 +45,30 @@ class _PublicationListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
+        final error = state.error;
+        if (error != null) {
+          return BitErrorWidget(error: error);
+        }
         return SizedBox(
           height: 120,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: state.publications.length,
-            itemBuilder: (context, index) {
-              final publication = state.publications[index];
-              return _PublicationView(
-                key: Key(publication.id),
-                publication: publication,
-                onPublicationClicked: () => Navigator.of(context).pushNamed(
-                  AppRoutes.articles,
-                  arguments: publication,
-                ),
-              );
-            },
-          ),
+          child: state.publications.isNotEmpty
+              ? ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: state.publications.length,
+                  itemBuilder: (context, index) {
+                    final publication = state.publications[index];
+                    return _PublicationView(
+                      key: ValueKey(publication.id),
+                      publication: publication,
+                      onPublicationClicked: () =>
+                          Navigator.of(context).pushNamed(
+                        AppRoutes.articles,
+                        arguments: publication,
+                      ),
+                    );
+                  },
+                )
+              : const BitEmptyWidget(),
         );
       },
     );

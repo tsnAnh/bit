@@ -5,6 +5,8 @@ import '../../../common/extensions/context.dart';
 import '../../../l10n/l10n.dart';
 import '../../../navigation/navigation.dart';
 import '../../../widgets/article_item_view.dart';
+import '../../../widgets/bit_empty_widget.dart';
+import '../../../widgets/error/bit_error_widget.dart';
 import '../bloc/home_bloc.dart';
 
 class HomeTodayArticlesListView extends StatelessWidget {
@@ -31,25 +33,31 @@ class _TodayArticlesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        return ListView.separated(
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 2,
-          ),
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: state.articles.length,
-          itemBuilder: (context, index) {
-            final article = state.articles[index];
-            return ArticleItemView(
-              key: Key(article.guid),
-              article: article,
-              onItemClicked: () {
-                Navigator.of(context)
-                    .pushNamed(AppRoutes.details, arguments: article);
-              },
-            );
-          },
-        );
+        final error = state.error;
+        if (error != null) {
+          return BitErrorWidget(error: error);
+        }
+        return state.articles.isNotEmpty
+            ? ListView.separated(
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 2,
+                ),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: state.articles.length,
+                itemBuilder: (context, index) {
+                  final article = state.articles[index];
+                  return ArticleItemView(
+                    key: ValueKey(article.guid),
+                    article: article,
+                    onItemClicked: () {
+                      Navigator.of(context)
+                          .pushNamed(AppRoutes.details, arguments: article);
+                    },
+                  );
+                },
+              )
+            : const BitEmptyWidget();
       },
     );
   }
