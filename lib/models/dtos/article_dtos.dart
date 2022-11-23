@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:webfeed/domain/rss_image.dart';
 
 part 'article_dtos.g.dart';
 part 'article_dtos.freezed.dart';

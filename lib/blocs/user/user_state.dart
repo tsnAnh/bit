@@ -19,7 +19,9 @@ class UserFetched extends UserState {
 }
 
 class UserNotFetched extends UserState {
-  const UserNotFetched();
+  const UserNotFetched(this.error);
+
+  final DataSourceError error;
 
   @override
   List<Object?> get props => [];

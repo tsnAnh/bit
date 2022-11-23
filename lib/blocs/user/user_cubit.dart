@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../common/error.dart';
 import '../../data/local/local.dart';
 import '../../data/local/local_storage_key.dart';
 import '../../domain/domain.dart';
@@ -18,7 +19,7 @@ class UserCubit extends Cubit<UserState> {
     final userInfoEither = await mediumRepository.getUserInfo();
     userInfoEither.fold(
       ifLeft: (error) {
-        emit(const UserNotFetched());
+        emit(UserNotFetched(error));
       },
       ifRight: (user) async {
         await storage.setString(LocalStorageKey.userId, user.id);
